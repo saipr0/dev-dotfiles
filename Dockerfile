@@ -28,7 +28,6 @@ RUN apt-get update \
     libssl-dev \
     libyaml-dev \
     locales \
-    neovim \
     openssh-client \
     pkg-config \
     postgresql-client \
