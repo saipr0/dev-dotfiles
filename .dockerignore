@@ -1,0 +1,10 @@
+.git/
+.DS_Store
+*.log
+*.swp
+*.swo
+*~
+nvim/.config/nvim/.claude/
+nvim/.config/nvim/.ruby-lsp/
+tmux/.tmux/
+zsh/.local/

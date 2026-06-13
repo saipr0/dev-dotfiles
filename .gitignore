@@ -1,0 +1,24 @@
+# OS/editor noise
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Logs and scratch files
+*.log
+Untitled
+
+# Local tool state
+.cache/
+.local/
+.zcompdump*
+.zsh_history
+
+# Neovim generated state copied from a live config
+nvim/.config/nvim/.claude/
+nvim/.config/nvim/.ruby-lsp/
+nvim/.config/nvim/lazy-lock.json.bak
+
+# Plugin/download state should be recreated by setup tools
+zsh/.local/share/zinit/
+tmux/.tmux/
