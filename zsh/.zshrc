@@ -65,6 +65,7 @@ export VISUAL='nvim'
 # Aliases.
 alias v='nvim'
 alias vb='NVIM_APPNAME=nvim-bare nvim'
+alias clear='clear -x'
 alias c='clear'
 alias nf='fastfetch'
 alias ff='fastfetch'
