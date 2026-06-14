@@ -1,3 +1,6 @@
+[settings]
+ruby.compile = false
+
 [tools]
 bat = "0.26"
 claude = "latest"
