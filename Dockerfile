@@ -60,10 +60,14 @@ RUN useradd --create-home --shell /bin/zsh saipr \
 USER saipr
 WORKDIR /home/saipr/dev-dotfiles
 
+COPY --chown=saipr:saipr mise/.config/mise/config.toml /home/saipr/dev-dotfiles/mise/.config/mise/config.toml
+
+RUN stow --no-folding --target="$HOME" mise
+RUN mise trust ~/.config/mise/config.toml && mise install
+
 COPY --chown=saipr:saipr . /home/saipr/dev-dotfiles
 
 RUN stow --no-folding --target="$HOME" zsh tmux nvim mise
-RUN mise trust ~/.config/mise/config.toml && mise install
 
 WORKDIR /workspace
 
