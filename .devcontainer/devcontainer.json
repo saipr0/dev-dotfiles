@@ -1,15 +1,11 @@
 {
   "name": "saipr-devbox",
-  "build": {
-    "dockerfile": "../Dockerfile",
-    "context": ".."
-  },
-  "remoteUser": "dev",
+  "image": "ghcr.io/saipr0/devbox:debian",
+  "remoteUser": "saipr",
   "workspaceFolder": "/workspace",
   "workspaceMount": "source=${localEnv:HOME}/workspace,target=/workspace,type=bind",
   "mounts": [
     "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
   ],
-  "forwardPorts": [3000, 3001],
-  "postCreateCommand": "/home/dev/dev-dotfiles/stow"
+  "forwardPorts": [3000, 3001]
 }
