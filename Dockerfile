@@ -3,22 +3,17 @@ FROM debian:trixie-slim
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8
 ENV MISE_INSTALL_PATH=/usr/local/bin/mise
-ENV PATH=/home/dev/.local/bin:/home/dev/.local/share/mise/shims:$PATH
+ENV PATH=/home/saipr/.local/bin:/home/saipr/.local/share/mise/shims:$PATH
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     apt-transport-https \
-    bat \
     build-essential \
     ca-certificates \
     curl \
-    eza \
-    fd-find \
-    fzf \
     git \
     gnupg \
     jq \
-    lazygit \
     less \
     libffi-dev \
     libgdbm-dev \
@@ -32,8 +27,6 @@ RUN apt-get update \
     pkg-config \
     postgresql-client \
     redis-tools \
-    ripgrep \
-    shellcheck \
     stow \
     sudo \
     tmux \
@@ -42,7 +35,6 @@ RUN apt-get update \
     xz-utils \
     zip \
     zlib1g-dev \
-    zoxide \
     zsh \
   && rm -rf /var/lib/apt/lists/*
 
@@ -58,19 +50,19 @@ RUN install -m 0755 -d /etc/apt/keyrings \
 
 RUN curl https://mise.run | sh
 
-RUN useradd --create-home --shell /bin/zsh dev \
-  && usermod -aG root dev \
-  && echo "dev ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/dev \
-  && chmod 0440 /etc/sudoers.d/dev \
+RUN useradd --create-home --shell /bin/zsh saipr \
+  && usermod -aG root saipr \
+  && echo "saipr ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/saipr \
+  && chmod 0440 /etc/sudoers.d/saipr \
   && mkdir -p /workspace \
-  && chown -R dev:dev /workspace
+  && chown -R saipr:saipr /workspace
 
-USER dev
-WORKDIR /home/dev/dev-dotfiles
+USER saipr
+WORKDIR /home/saipr/dev-dotfiles
 
-COPY --chown=dev:dev . /home/dev/dev-dotfiles
+COPY --chown=saipr:saipr . /home/saipr/dev-dotfiles
 
-RUN ./stow
+RUN stow --no-folding --target="$HOME" zsh tmux nvim mise
 RUN mise trust ~/.config/mise/config.toml && mise install
 
 WORKDIR /workspace
