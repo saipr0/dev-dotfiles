@@ -36,7 +36,7 @@ return {
       vim.treesitter.start(buf, language)
 
       local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
-      if has_indent_query and language ~= 'ruby' then
+      if has_indent_query then
         vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end
     end

@@ -44,12 +44,14 @@ vim.opt.guicursor = {
   'n-v-c-sm:block',
   'i-ci-ve:ver25',
   'r-cr-o:block',
+  't:block-blinkon500-blinkoff500-TermCursor',
 }
 
 local cursor_shapes = {
   'n-v-c-sm:block',
   'i-ci-ve:ver25',
   'r-cr-o:block',
+  't:block-blinkon500-blinkoff500-TermCursor',
 }
 
 local cursor_shape_group = vim.api.nvim_create_augroup('cursor-shape-refresh', { clear = true })

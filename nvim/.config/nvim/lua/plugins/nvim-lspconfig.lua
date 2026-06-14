@@ -117,26 +117,6 @@ return {
     --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-    local function ruby_lsp_env(root_dir)
-      local env = vim.fn.environ()
-      if not root_dir then
-        return env
-      end
-
-      local f = io.open(root_dir .. '/.ruby-version', 'r')
-      if not f then
-        return env
-      end
-
-      local version = (f:read '*l' or ''):gsub('^ruby%-', ''):gsub('%s+', '')
-      f:close()
-      if version ~= '' then
-        env.RBENV_VERSION = version
-      end
-
-      return env
-    end
-
     local servers = {
       -- clangd = {},
       -- gopls = {},
@@ -158,14 +138,7 @@ return {
         },
       },
       ruby_lsp = {
-        cmd = function(dispatchers, config)
-          local root_dir = config.root_dir or vim.fn.getcwd()
-
-          return vim.lsp.rpc.start({ vim.fn.expand '~/.rbenv/shims/ruby-lsp' }, dispatchers, {
-            cwd = root_dir,
-            env = ruby_lsp_env(root_dir),
-          })
-        end,
+        cmd = { 'ruby-lsp' },
         init_options = {
           experimentalFeaturesEnabled = true,
         },

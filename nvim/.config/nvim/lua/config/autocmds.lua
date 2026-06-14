@@ -8,6 +8,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 local general_group = vim.api.nvim_create_augroup('general-autocmds', { clear = true })
 
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Copy yanks to the terminal clipboard over OSC52',
+  group = general_group,
+  callback = function()
+    local event = vim.v.event
+    if not vim.tbl_contains({ '', '+', '*' }, event.regname) or event.operator ~= 'y' then
+      return
+    end
+
+    pcall(vim.fn.OSCYankRegister, event.regname)
+  end,
+})
+
 vim.api.nvim_create_autocmd('BufReadPost', {
   desc = 'Restore cursor to last edit position',
   group = general_group,
