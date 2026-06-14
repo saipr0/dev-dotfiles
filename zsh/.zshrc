@@ -1,5 +1,8 @@
+is_ssh_session=false
+[[ -n "${SSH_CONNECTION:-}${SSH_CLIENT:-}${SSH_TTY:-}" ]] && is_ssh_session=true
+
 # Enable Powerlevel10k instant prompt. Keep this near the top.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+if [[ "$is_ssh_session" != true && -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -17,7 +20,9 @@ zinit ice depth=1
 zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
+if [[ "$is_ssh_session" != true ]]; then
+  zinit light zsh-users/zsh-autosuggestions
+fi
 zinit light Aloxaf/fzf-tab
 
 autoload -Uz compinit && compinit
