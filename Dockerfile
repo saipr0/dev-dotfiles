@@ -8,6 +8,7 @@ ENV PATH=/home/saipr/.local/bin:/home/saipr/.local/share/mise/shims:$PATH
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     apt-transport-https \
+    bubblewrap \
     build-essential \
     ca-certificates \
     curl \
